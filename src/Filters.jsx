@@ -155,11 +155,11 @@ export class Filters extends Component {
                 <div className="card">
                     <Tooltip target=".export-buttons>button" />
                     <DataTable
-                    ref={(el) => { this.dt = el; }}
-                    selectionMode="multiple"
-                    onSelectionChange={this.onSelectionChange}
-                    selection={this.state.selectedProducts}
-                    paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
+                        ref={(el) => { this.dt = el; }}
+                        selectionMode="multiple"
+                        onSelectionChange={this.onSelectionChange}
+                        selection={this.state.selectedProducts}
+                        paginatorTemplate="CurrentPageReport FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink RowsPerPageDropdown"
                         currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
                         value={this.state.customers1}
                         paginator
