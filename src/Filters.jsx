@@ -37,9 +37,10 @@ export class Filters extends Component {
 
         this.cols = [
             { field: 'id', header: 'ID' },
-            { field: 'name', header: 'Name' },
-            { field: 'email', header: 'Email' },
-            { field: 'body', header: 'Body' }
+            { field: 'albumId', header: 'albumId' },
+            { field: 'title', header: 'Email' },
+            { field: 'url', header: 'Body' },
+            { field: 'thumbnailUrl', header: 'Body' },
         ];
 
         this.exportColumns = this.cols.map(col => ({ title: col.header, dataKey: col.field }));
@@ -58,12 +59,12 @@ export class Filters extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://jsonplaceholder.typicode.com/comments')
+        axios.get('https://jsonplaceholder.typicode.com/photos')
             .then((res) => {
                 console.log("API", res.data);
                 this.setState({ customers1: res.data, loading1: false });
             })
-        this.initFilters1();
+        this.initFilters();
     }
 
     exportCSV(selectionOnly) {
@@ -105,7 +106,7 @@ export class Filters extends Component {
     }
 
     clearFilter1() {
-        this.initFilters1();
+        this.initFilters();
     }
 
     onGlobalFilterChange1(e) {
@@ -116,7 +117,7 @@ export class Filters extends Component {
         this.setState({ filters1, globalFilterValue1: value });
     }
 
-    initFilters1() {
+    initFilters() {
         this.setState({
             filters1: {
                 'global': { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -125,31 +126,29 @@ export class Filters extends Component {
         });
     }
 
-    renderHeader1() {
+    renderHeader() {
         return (
-            <div className="flex justify-content-between">
-                <Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined" onClick={this.clearFilter1} />
-                <span className="p-input-icon-left">
-                    <i className="pi pi-search" />
-                    <InputText value={this.state.globalFilterValue1} onChange={this.onGlobalFilterChange1} placeholder="Keyword Search" />
-                </span>
-            </div>
-        )
-    }
-
-    renderHeader2() {
-        return (
-            <div className="flex align-items-center export-buttons">
-                <Button type="button" icon="pi pi-file" onClick={() => this.exportCSV(false)} className="mr-2" data-pr-tooltip="CSV" />
-                <Button type="button" icon="pi pi-file-excel" onClick={this.exportExcel} className="p-button-success mr-2" data-pr-tooltip="XLS" />
-                <Button type="button" icon="pi pi-file-pdf" onClick={this.exportPdf} className="p-button-warning mr-2" data-pr-tooltip="PDF" />
+            <div className="container">
+                <div className="d-flex justify-content-between">
+                    <div className="export-buttons">
+                        <Button type="button" icon="pi pi-file" onClick={() => this.exportCSV(false)} className="mr-2" data-pr-tooltip="CSV" />
+                        <Button type="button" icon="pi pi-file-excel" onClick={this.exportExcel} className="p-button-success mr-2" data-pr-tooltip="XLS" />
+                        <Button type="button" icon="pi pi-file-pdf" onClick={this.exportPdf} className="p-button-warning mr-2" data-pr-tooltip="PDF" />
+                    </div>
+                    <div className="d-flex justify-content-around">
+                        <Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined" onClick={this.clearFilter1} />
+                        <span className="p-input-icon-left">
+                            <i className="pi pi-search" />
+                            <InputText value={this.state.globalFilterValue1} onChange={this.onGlobalFilterChange1} placeholder="Keyword Search" />
+                        </span>
+                    </div>
+                </div>
             </div>
         )
     }
 
     render() {
-        const header1 = this.renderHeader1();
-        const header2 = this.renderHeader2();
+        const header = this.renderHeader();
         return (
             <div className="datatable-filter-demo">
                 <div className="card">
@@ -166,16 +165,15 @@ export class Filters extends Component {
                         className="p-datatable-customers"
                         showGridlines
                         rows={10}
-                        rowsPerPageOptions={[10, 20, 50, 100]}
+                        rowsPerPageOptions={[5, 10, 20, 50, 100]}
                         dataKey="id"
                         filters={this.state.filters1}
                         filterDisplay="menu"
                         loading={this.state.loading1}
                         responsiveLayout="scroll"
                         globalFilterFields={['name', 'id', 'email', 'body']}
-                        header={[header1, header2]}
+                        header={header}
                         emptyMessage="No Employee Found.">
-
                         <Column field="id" header="ID" filter filterPlaceholder="Search by id" style={{ minWidth: '12rem' }}></Column>
                         <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }}></Column>
                         <Column field="email" header="Email" filter filterPlaceholder="Search by email" style={{ minWidth: '12rem' }}></Column>

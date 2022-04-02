@@ -4,7 +4,7 @@ import './App.css';
 // import Page from './Page';
 import {Filters} from './Filters';
 // import RDataTable from './RDataTable';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div className="App">
