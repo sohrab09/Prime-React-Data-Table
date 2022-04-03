@@ -37,10 +37,10 @@ export class Filters extends Component {
 
         this.cols = [
             { field: 'id', header: 'ID' },
-            { field: 'albumId', header: 'albumId' },
-            { field: 'title', header: 'Email' },
-            { field: 'url', header: 'Body' },
-            { field: 'thumbnailUrl', header: 'Body' },
+            { field: 'albumId', header: 'AlbumId' },
+            { field: 'title', header: 'Title' },
+            { field: 'url', header: 'URL' },
+            { field: 'thumbnailUrl', header: 'Thumbnail URL' },
         ];
 
         this.exportColumns = this.cols.map(col => ({ title: col.header, dataKey: col.field }));
@@ -131,12 +131,12 @@ export class Filters extends Component {
             <div className="container">
                 <div className="d-flex justify-content-between">
                     <div className="export-buttons">
-                        <Button type="button" icon="pi pi-file" onClick={() => this.exportCSV(false)} className="mr-2" data-pr-tooltip="CSV" />
-                        <Button type="button" icon="pi pi-file-excel" onClick={this.exportExcel} className="p-button-success mr-2" data-pr-tooltip="XLS" />
-                        <Button type="button" icon="pi pi-file-pdf" onClick={this.exportPdf} className="p-button-warning mr-2" data-pr-tooltip="PDF" />
+                        <Button type="button" icon="pi pi-file" onClick={() => this.exportCSV(false)} className="mr-2" style={{ marginRight: '20px' }} data-pr-tooltip="CSV" />
+                        <Button type="button" icon="pi pi-file-excel" onClick={this.exportExcel} className="p-button-success mr-2" style={{ marginRight: '20px' }} data-pr-tooltip="XLS" />
+                        <Button type="button" icon="pi pi-file-pdf" onClick={this.exportPdf} className="p-button-warning mr-2" style={{ marginRight: '20px' }} data-pr-tooltip="PDF" />
                     </div>
                     <div className="d-flex justify-content-around">
-                        <Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined" onClick={this.clearFilter1} />
+                        <Button type="button" icon="pi pi-filter-slash" label="Clear" className="p-button-outlined ml-5" style={{ marginRight: '20px' }} onClick={this.clearFilter1} />
                         <span className="p-input-icon-left">
                             <i className="pi pi-search" />
                             <InputText value={this.state.globalFilterValue1} onChange={this.onGlobalFilterChange1} placeholder="Keyword Search" />
@@ -175,9 +175,10 @@ export class Filters extends Component {
                         header={header}
                         emptyMessage="No Employee Found.">
                         <Column field="id" header="ID" filter filterPlaceholder="Search by id" style={{ minWidth: '12rem' }}></Column>
-                        <Column field="name" header="Name" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }}></Column>
-                        <Column field="email" header="Email" filter filterPlaceholder="Search by email" style={{ minWidth: '12rem' }}></Column>
-                        <Column field="body" header="Body" filter filterPlaceholder="Search by body" style={{ minWidth: '12rem' }}></Column>
+                        <Column field="albumId" header="Album ID" filter filterPlaceholder="Search by name" style={{ minWidth: '12rem' }}></Column>
+                        <Column field="title" header="Title" filter filterPlaceholder="Search by email" style={{ minWidth: '12rem' }}></Column>
+                        <Column field="url" header="URL" filter filterPlaceholder="Search by body" style={{ minWidth: '12rem' }}></Column>
+                        <Column field="thumbnailUrl" header="Thumbnail URL" filter filterPlaceholder="Search by body" style={{ minWidth: '12rem' }}></Column>
                     </DataTable>
                 </div>
             </div>
